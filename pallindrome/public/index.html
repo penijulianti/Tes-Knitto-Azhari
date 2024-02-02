@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Palindrome</title>
+</head>
+<body>
+  <h1>Check Palindrome</h1>
+  <input type="text" id="inputan" placeholder="Masukkan Kata">
+  <button onclick="checkPalindrome()">Check</button>
+  <p id="result"></p>
+
+  <script>
+    async function checkPalindrome() {
+      const input = document.getElementById('inputan').value;
+      const response = await fetch('/check-palindrome', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ text: input }),
+      });
+      const data = await response.json();
+      document.getElementById('result').textContent = data.isPalindrome ? "Kata Tersebut Pallindrome!" : "Kata Tersebut Bukanlah Pallindrome.";
+    }
+  </script>
+</body>
+</html>
